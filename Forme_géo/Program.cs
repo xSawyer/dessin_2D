@@ -17,8 +17,9 @@ namespace Forme_géo
             Graphics grphcs;
 
             Ligne ligne1;
+            btmp = new Bitmap(800, 400);
 
-            ligne1 = new Ligne();
+            ligne1 = new Ligne(100, 100, 200, 300, 255, 0, 0);
             grphcs = Graphics.FromImage(btmp);
 
             ligne1.Dessiner(grphcs);
@@ -46,7 +47,7 @@ namespace Forme_géo
         public int angle;
 
         //Constructeur
-        public void Ligne(int xA, int yA, int, int xB, int yB) 
+        public Ligne(int xA, int yA, int xB, int yB, int rouge, int vert, int bleu) 
         {
             A.X = xA;
             A.Y = yA;
@@ -55,6 +56,7 @@ namespace Forme_géo
 
             angle = 0;
             epaisseur = 1;
+            r = rouge; v = vert; b = bleu;
         }
 
 
@@ -62,7 +64,7 @@ namespace Forme_géo
         public void Dessiner(Graphics grphcs)
         {
             grphcs.RotateTransform(angle);
-            grphcs.DrawLine(new Pen());
+            grphcs.DrawLine(new Pen(Color.FromArgb(255,0,0)), A, B);
         }
 
         public void Rotation(int alpha)
