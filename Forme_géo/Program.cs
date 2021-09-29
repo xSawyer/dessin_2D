@@ -12,6 +12,26 @@ namespace Forme_géo
 
         static void Main()
         {
+            Form myForm;
+            Bitmap btmp;
+            Graphics grphcs;
+
+            Ligne ligne1;
+
+            ligne1 = new Ligne();
+            grphcs = Graphics.FromImage(btmp);
+
+            ligne1.Dessiner(grphcs);
+
+            myForm = new Form();
+            myForm.Text = "CNAM Licence Cyber-Sécurité 2021-2022";
+            myForm.BackColor = Color.FromArgb(255,255,255);
+            myForm.ClientSize = btmp.Size;
+            myForm.BackgroundImage = btmp;
+            myForm.Cursor = Cursors.Cross;
+            myForm.ShowDialog();
+            myForm.Dispose();
+
 
         }
 
@@ -25,11 +45,24 @@ namespace Forme_géo
         public int r, v, b;
         public int angle;
 
+        //Constructeur
+        public void Ligne(int xA, int yA, int, int xB, int yB) 
+        {
+            A.X = xA;
+            A.Y = yA;
+            B.X = xB;
+            B.Y = yB;
+
+            angle = 0;
+            epaisseur = 1;
+        }
+
 
         //méthodes
-        public void Dessiner()
+        public void Dessiner(Graphics grphcs)
         {
-
+            grphcs.RotateTransform(angle);
+            grphcs.DrawLine(new Pen());
         }
 
         public void Rotation(int alpha)
