@@ -10,12 +10,11 @@ namespace Forme_géo
     static class Program
     {
 
-        static void Main()
+        static void Main(string[] args)
         {
             Form myForm;
             Bitmap btmp;
             Graphics grphcs;
-
             
             Ligne ligne1, ligne2, ligne3, ligne4, ligne5;
             btmp = new Bitmap(800, 400);
@@ -24,7 +23,7 @@ namespace Forme_géo
             ligne2 = new Ligne(100, 20, 100, 100, 100, 100, 100);
             ligne3 = new Ligne(100, 100, 20, 100, 100, 100, 100);
             ligne4 = new Ligne(20, 100, 20, 20, 100, 100, 100);
-            ligne5 = new Ligne(20, 100, 100, 20, 255, 0, 0);
+            ligne5 = new Ligne(20, 100, 100, 20, 255, 0, 0, 10);
 
             grphcs = Graphics.FromImage(btmp);
             
@@ -94,7 +93,20 @@ namespace Forme_géo
             B.Y = yB;
 
             angle = 0;
-            epaisseur = 5;
+            epaisseur = 3;
+            r = rouge; v = vert; b = bleu;
+        }
+
+        //2ème constructeur avec un paramètre en plus (épaisseur)
+        public Ligne(int xA, int yA, int xB, int yB, int rouge, int vert, int bleu, int width)
+        {
+            A.X = xA;
+            A.Y = yA;
+            B.X = xB;
+            B.Y = yB;
+
+            angle = 0;
+            epaisseur = width;
             r = rouge; v = vert; b = bleu;
         }
 
@@ -143,15 +155,5 @@ namespace Forme_géo
             this.r = rouge; this.v = vert; this.b = bleu;            
         }
     }
-
-    class Rectangle
-    {
-
-    }
-
-
-
-
-
  
 }
