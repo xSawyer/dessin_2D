@@ -16,17 +16,35 @@ namespace Forme_géo
             Bitmap btmp;
             Graphics grphcs;
 
-            Ligne ligne1;
+            
+            Ligne ligne1, ligne2, ligne3, ligne4, ligne5;
             btmp = new Bitmap(800, 400);
 
-            ligne1 = new Ligne(100, 100, 200, 300, 255, 0, 0);
-            grphcs = Graphics.FromImage(btmp);
+            ligne1 = new Ligne(20, 20, 100, 20, 100, 100, 100);
+            ligne2 = new Ligne(100, 20, 100, 100, 100, 100, 100);
+            ligne3 = new Ligne(100, 100, 20, 100, 100, 100, 100);
+            ligne4 = new Ligne(20, 100, 20, 20, 100, 100, 100);
+            ligne5 = new Ligne(20, 100, 100, 20, 255, 0, 0);
 
+            grphcs = Graphics.FromImage(btmp);
+            
             ligne1.Dessiner(grphcs);
+            ligne2.Dessiner(grphcs);
+            ligne3.Dessiner(grphcs);
+            ligne4.Dessiner(grphcs);            
+            ligne5.Dessiner(grphcs);
+
+            ligne4.ChangeCouleur(0, 255, 0);
+            ligne4.Dessiner(grphcs);
+            /*ligne1.Translation(20, 20);
+            ligne1.Dessiner(grphcs);
+            ligne1.Rotation(50);
+            ligne1.Dessiner(grphcs);*/
+
 
             myForm = new Form();
             myForm.Text = "CNAM Licence Cyber-Sécurité 2021-2022";
-            myForm.BackColor = Color.FromArgb(255,255,255);
+            myForm.BackColor = Color.FromArgb(255, 255, 255);
             myForm.ClientSize = btmp.Size;
             myForm.BackgroundImage = btmp;
             myForm.Cursor = Cursors.Cross;
@@ -40,14 +58,35 @@ namespace Forme_géo
     class Ligne
     {
         //champs
-        public Point A, B;
-        public int epaisseur;
-        public double longueur;
-        public int r, v, b;
-        public int angle;
+        private Point A, B;
+        private int epaisseur;
+        private double longueur;
+        private int r, v, b;
+        private int angle;
+
+        //exemple getter
+
+        //Exmple auto-implémenté :
+        public int R
+        {
+            set { this.r = value; }
+        }
+
+        //Exemple complet avec get&set :
+        public int V
+        {
+            get { return v; }
+            set { this.v = value; }
+        }
+
+        public int Bk //équivaut à b
+        {
+            set { this.b = value; }
+        }
+
 
         //Constructeur
-        public Ligne(int xA, int yA, int xB, int yB, int rouge, int vert, int bleu) 
+        public Ligne(int xA, int yA, int xB, int yB, int rouge, int vert, int bleu)
         {
             A.X = xA;
             A.Y = yA;
@@ -55,7 +94,7 @@ namespace Forme_géo
             B.Y = yB;
 
             angle = 0;
-            epaisseur = 1;
+            epaisseur = 5;
             r = rouge; v = vert; b = bleu;
         }
 
@@ -64,7 +103,10 @@ namespace Forme_géo
         public void Dessiner(Graphics grphcs)
         {
             grphcs.RotateTransform(angle);
-            grphcs.DrawLine(new Pen(Color.FromArgb(255,0,0)), A, B);
+            Pen pen = new Pen(Color.FromArgb(r, v, b));
+            pen.Width = epaisseur;
+            grphcs.DrawLine(pen, A, B);
+        
         }
 
         public void Rotation(int alpha)
@@ -88,14 +130,28 @@ namespace Forme_géo
             Translation(mX, mY);
         }
 
-        public void Translation(int x, int y) 
+        public void Translation(int x, int y)
         {
             A.X += x;
             A.Y += y;
             B.X += x;
             B.Y += y;
         }
+
+        public void ChangeCouleur(int rouge, int vert, int bleu)
+        {
+            this.r = rouge; this.v = vert; this.b = bleu;            
+        }
     }
-    
+
+    class Rectangle
+    {
+
+    }
+
+
+
+
+
  
 }
